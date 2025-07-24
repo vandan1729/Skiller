@@ -1,0 +1,11 @@
+{
+    "python.defaultInterpreterPath": "/home/elixir/Documents/virtual_env/Skiller__backend/bin/python",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/migrations": false,
+    }
+}

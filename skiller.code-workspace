@@ -1,0 +1,27 @@
+{
+  "folders": [
+    {
+      "name": "Backend",
+      "path": "backend"
+    },
+    {
+      "name": "AI Grading Service",
+      "path": "ai-grading-service"
+    },
+    {
+      "name": "Frontend",
+      "path": "frontend"
+    },
+    {
+      "name": "Kafka Services",
+      "path": "kafka-services"
+    },
+    {
+      "name": "Root Config",
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Optional: Global workspace settings go here
+  }
+}
