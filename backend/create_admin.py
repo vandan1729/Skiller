@@ -4,18 +4,20 @@ Script to create a tenant and superuser for the Skiller multi-tenant platform
 """
 import os
 import sys
+
 import django
+from django.contrib.auth import get_user_model
+from django.db import transaction
+
+from public_apps.tenants.models import Tenant
 
 # Add the project directory to Python path
-sys.path.append('/home/elixir/Documents/PycharmProjects/Skiller/backend')
+sys.path.append('/home/elixir/Documents/PycharmProjects/skiller/backend')
 
 # Setup Django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skiller.settings')
 django.setup()
 
-from django.contrib.auth import get_user_model
-from tenants.models import Tenant, TenantSettings
-from django.db import transaction
 
 def create_tenant_and_superuser():
     User = get_user_model()

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class InterviewsConfig(AppConfig):
+class SubmissionsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'interviews'
+    name = 'tenant_apps.submissions'

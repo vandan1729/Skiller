@@ -13,13 +13,13 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     
     # API endpoints
-    path('api/auth/', include('authentication.urls')),
-    path('api/tenants/', include('tenants.urls')),
-    path('api/interviews/', include('interviews.urls')),
-    path('api/questions/', include('questions.urls')),
-    path('api/submissions/', include('submissions.urls')),
-    path('api/grading/', include('grading.urls')),
-    path('api/candidates/', include('candidates.urls')),
+    path('api/auth/', include('tenant_apps.authentication.urls')),
+    path('api/tenants/', include('public_apps.tenants.urls')),
+    path('api/interviews/', include('tenant_apps.interviews.urls')),
+    path('api/questions/', include('tenant_apps.questions.urls')),
+    path('api/submissions/', include('tenant_apps.submissions.urls')),
+    path('api/grading/', include('tenant_apps.grading.urls')),
+    path('api/candidates/', include('tenant_apps.candidates.urls')),
 ]
 
 if settings.DEBUG:

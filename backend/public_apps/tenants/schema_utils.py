@@ -2,10 +2,13 @@
 PostgreSQL Schema Management Utilities for Multi-Tenant Architecture
 """
 
-from django.db import connection, transaction
-from django.core.management import call_command
-from django.conf import settings
 import logging
+from pathlib import Path
+
+from django.apps import apps
+from django.conf import settings
+from django.core.management import call_command
+from django.db import connection
 
 logger = logging.getLogger(__name__)
 
@@ -68,11 +71,26 @@ class SchemaManager:
         with connection.cursor() as cursor:
             cursor.execute("SELECT current_schema()")
             return cursor.fetchone()[0]
+        
+    @staticmethod
+    def get_user_defined_public_apps():
+        user_public_apps = []
+        project_root = Path(settings.BASE_DIR)
+        apps_dir = project_root / 'apps'
+        if not apps_dir.is_dir():
+            logger.warning(f"Apps directory not found: {apps_dir}")
+            return user_public_apps
+
+        user_public_apps = [item.name for item in apps_dir.iterdir() if item.is_dir()]
+
+        return user_public_apps
+            
     
     @staticmethod
     def migrate_schema(schema_name, app_labels=None):
         """Run Django migrations for a specific schema"""
         try:
+            
             # Set search path to the tenant schema
             SchemaManager.set_search_path(schema_name)
             
@@ -81,9 +99,15 @@ class SchemaManager:
                 for app_label in app_labels:
                     call_command('migrate', app_label, verbosity=0, interactive=False)
             else:
-                # Exclude tenants app to avoid circular dependencies
-                call_command('migrate', exclude=['tenants'], verbosity=0, interactive=False)
-            
+                # Get all installed apps except tenants
+                tenant_apps = SchemaManager.get_user_defined_public_apps()
+                
+                for app_label in tenant_apps:
+                    try:
+                        call_command('migrate', app_label, verbosity=0, interactive=False)
+                    except Exception as app_error:
+                        logger.warning(f"Could not migrate app {app_label} for schema {schema_name}: {app_error}")
+        
             logger.info(f"Migrations completed for schema: {schema_name}")
             return True
             

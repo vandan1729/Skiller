@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 class TenantsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tenants'
+    name = 'public_apps.tenants'
     
     def ready(self):
-        import tenants.signals
+        import public_apps.tenants.signals

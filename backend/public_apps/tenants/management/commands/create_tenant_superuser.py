@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from tenants.models import Tenant, TenantSettings
-from tenants.schema_utils import SchemaManager
+from public_apps.tenants.models import Tenant
+from public_apps.tenants.schema_utils import SchemaManager
 import getpass
 import logging
 

@@ -2,7 +2,7 @@ import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
 from rest_framework import authentication, exceptions
-from tenants.models import TenantUser
+from public_apps.tenants.models import TenantUser
 
 
 class JWTAuthentication(authentication.BaseAuthentication):

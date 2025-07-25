@@ -1,5 +1,5 @@
 from django.db import models
-from tenants.models import TenantUser
+from public_apps.tenants.models import TenantUser
 import uuid
 
 

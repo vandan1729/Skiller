@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from django.contrib.auth import authenticate
-from tenants.models import TenantUser, Tenant
+from public_apps.tenants.models import TenantUser, Tenant
 
 
 class LoginSerializer(serializers.Serializer):

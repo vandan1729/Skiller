@@ -33,18 +33,18 @@ INSTALLED_APPS = [
     'drf_spectacular',
     
     # Local apps
-    'tenants',
-    'authentication',
-    'interviews',
-    'questions',
-    'submissions',
-    'grading',
-    'candidates',
+    'public_apps.tenants',
+    'tenant_apps.authentication',
+    'tenant_apps.interviews',
+    'tenant_apps.questions',
+    'tenant_apps.submissions',
+    'tenant_apps.grading',
+    'tenant_apps.candidates',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'tenants.middleware.TenantMiddleware',
+    'public_apps.tenants.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,7 +124,7 @@ AUTH_USER_MODEL = 'tenants.TenantUser'
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'authentication.backends.JWTAuthentication',
+        'tenant_apps.authentication.backends.JWTAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
